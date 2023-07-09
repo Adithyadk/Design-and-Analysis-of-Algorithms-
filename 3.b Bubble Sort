@@ -1,0 +1,83 @@
+// Bubble Sort Algorithm
+
+#include <stdio.h>
+#include <stdlib.h>
+int bubble(int *a, int n)
+{
+    int c = 0, i, j, t, f = 0;
+    for (i = 0; i < n - 1; i++)
+    {
+        f = 0;
+        for (j = 0; j < n - i - 1; j++)
+        {
+            c++;
+            if (a[j] > a[j + 1])
+            {
+                f = 1;
+                t = *(a + j);
+                *(a + j) = *(a + j + 1);
+                *(a + j + 1) = t;
+            }
+        }
+        if (f == 0)
+            return c;
+    }
+    return c;
+}
+void main()
+{
+    int ct, i = 100, k, *a;
+    FILE *f;
+    ct = 0;
+    f = fopen("bub_time.txt", "a");
+
+    while (i <= 40000)
+    {
+        a = (int *)malloc(sizeof(int) * i);
+        // Best case
+        for (k = 1; k <= i; k++)
+            *(a + k) = k;
+        ct = bubble(a, i);
+        printf("bestfor i: %d\tct :%d\n", i, ct);
+        fprintf(f, "%d\t\t%d\t\t", i, ct);
+        // Worst Case
+        for (k = 1; k <= i; k++)
+            *(a + k) = i - k;
+        ct = bubble(a, i);
+        printf("worstfor i: %d\tct :%d\n", i, ct);
+        fprintf(f, "%d\t\t%d\n", i, ct);
+        if (i < 10000)
+            i *= 10;
+        else
+            i *= 2;
+    }
+    fclose(f);
+    system("gnuplot >load 'bubble_plot1.txt'");
+    system("gnuplot >load 'bubble_plot2.txt'");
+}
+
+/*
+100 99 100 4950
+1000 999 1000 499500
+10000 9999 10000 49995000
+20000 19999 20000 199990000
+40000 39999 40000 799980000
+
+set title 'Bubble Plot'
+set xrange [0:40000]
+set yrange [0:40000]
+set xlabel 'Input Size '
+set ylabel 'Basic Operation Count'
+set style data linespoints
+plot 'bub_time.txt' u 1:2 w lp
+pause -1 "Hit any key to continue"
+
+set title 'Bubble Plot'
+set xrange [0:40000]
+set xlabel 'Input Size'
+set ylabel 'Basic Opereation Count'
+set style data linespoints
+plot 'bub_time.txt' u 3:4 w lp
+pause -1 "Hit any key to continue"
+
+*/
