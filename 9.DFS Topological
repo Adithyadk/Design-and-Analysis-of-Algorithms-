@@ -1,4 +1,4 @@
-//BFS Topological Sorting.
+//DFS Topological Sorting.
 
 #include <stdio.h>
 #include<stdlib.h>
