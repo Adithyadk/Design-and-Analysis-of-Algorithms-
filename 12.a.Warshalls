@@ -4,7 +4,6 @@
 #include <stdlib.h>
 int n;
 int count;
-
 void Warshall(int M[n][n], int n)
 {
     printf("\n Inside Warshall \n");
@@ -55,6 +54,22 @@ void Warshall(int M[n][n], int n)
     }
 
 }
+void checkdirected(int a[n][n])
+{
+    int flag = 0;
+    for (int i = 1; i <= n - 1; i++)
+        for (int j = i; j <= n; j++)
+            if (a[i][j] == 1 && a[j][i] == 1)
+            {
+                flag = 1;
+                break;
+            }
+    if (flag == 1)
+        printf("Warshall Algorithm not Applicable because graph is undirected\n");
+    else
+        Warshall(a,n);
+}
+
 
 void main()
 {
@@ -81,7 +96,7 @@ void main()
         }
         printf("\n");
     }
-    Warshall(a,n);
+    checkdirected(a);
     fprintf(f,"%d\t%d",n,count);
     fclose(f);
 }
