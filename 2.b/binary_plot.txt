@@ -1,0 +1,7 @@
+set title "Recursive Binary Search"
+set xrange [1000:50000]
+set yrange [1: 50]
+set xlabel 'Number of elemnts(n)'
+set ylabel 'Count(Number of Operations)'
+set style data linespoints
+plot 'count.dat' u 1:2 w lp ,'count.dat' u 3:4 w lp
