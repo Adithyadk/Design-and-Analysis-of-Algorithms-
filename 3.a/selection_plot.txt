@@ -1,0 +1,8 @@
+set title "Selection Sort"
+set xrange [10:40000]
+set xlabel 'Number of elements(n)'
+set ylabel 'Count'
+set style data linespoints
+plot 'data.txt' u 1:2 w lp
+pause -1 "Hit any Key to Continue"
+
