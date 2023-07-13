@@ -1,0 +1,7 @@
+set title "Linear Search"
+set xrange [0:100]
+set yrange [0:30]
+set xlabel "Number of elements(n)"
+set ylabel "Basic Operation Count"
+set style data linespoints
+plot 'timingLinear.txt' u 1:2 w lp, 'timingLinear.txt' u 3:4 w lp, 'timingLinear.txt' u 5:6 w lp
